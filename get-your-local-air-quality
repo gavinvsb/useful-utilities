@@ -1,0 +1,23 @@
+"""Script to get the air quality based on the user's current location"""
+
+# Generate API token: https://aqicn.org/data-platform/token/#/
+
+
+import requests as req
+
+token = ""
+if __name__ == "__main__":
+    if bool(token):
+        url = "https://api.waqi.info/feed/here/?token=" + token
+        response = req.get(url, verify=False)
+        if response.json()['status'] == "ok":
+            print("The air quality is " + str(response.json()['data']['aqi']))
+            print("The data was fetched from " +
+                  response.json()['data']['city']['name'])
+            print("The pollutant measured was " +
+                  str(response.json()['data']['dominentpol']))
+        elif response.json()['status'] == "error":
+            print("The server returned an error. The message is " +
+                  response.json()['data'])
+    else:
+        print("Cannot fetch AQI without token. Generate a token at: https://aqicn.org/data-platform/token/#/")
