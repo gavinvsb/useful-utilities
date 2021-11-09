@@ -1,0 +1,16 @@
+# Generate QR Code for website, location, and phone number
+
+# Required Dependencies
+## pip install pyqrcode
+## pip install pypng
+
+# Import packages
+import pyqrcode
+from pyqrcode import QRCode
+import pypng
+dest = ['https://your-website.com', '10500 N De Anza Blvd, Cupertino, CA 95014', '+1 (234) 567-8901']
+
+# Generate and save each QR Code for each item in "dest"
+for i in dest:
+    myQR = QRCode(i)
+    myQR.png('myqrcode'+str(dest.index(i))+'.png', scale=8)
